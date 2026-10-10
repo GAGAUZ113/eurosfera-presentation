@@ -1,0 +1,186 @@
+/* Шрифты — локально */
+@font-face{font-family:"Unbounded";font-weight:500;font-display:swap;src:url(fonts/unb-500.woff2) format("woff2");unicode-range:U+0400-04FF,U+2116}
+@font-face{font-family:"Unbounded";font-weight:500;font-display:swap;src:url(fonts/unb-500-lat.woff2) format("woff2");unicode-range:U+0000-00FF,U+2010-2027,U+20AC}
+@font-face{font-family:"Unbounded";font-weight:300;font-display:swap;src:url(fonts/unb-300.woff2) format("woff2");unicode-range:U+0400-04FF,U+2116}
+@font-face{font-family:"Unbounded";font-weight:300;font-display:swap;src:url(fonts/unb-300-lat.woff2) format("woff2");unicode-range:U+0000-00FF,U+2010-2027,U+20AC}
+@font-face{font-family:"Manrope";font-weight:400;font-display:swap;src:url(fonts/man-400.woff2) format("woff2");unicode-range:U+0400-04FF,U+2116}
+@font-face{font-family:"Manrope";font-weight:400;font-display:swap;src:url(fonts/man-400-lat.woff2) format("woff2");unicode-range:U+0000-00FF,U+2010-2027,U+20AC}
+@font-face{font-family:"Manrope";font-weight:500;font-display:swap;src:url(fonts/man-500.woff2) format("woff2");unicode-range:U+0400-04FF,U+2116}
+@font-face{font-family:"Manrope";font-weight:500;font-display:swap;src:url(fonts/man-500-lat.woff2) format("woff2");unicode-range:U+0000-00FF,U+2010-2027,U+20AC}
+@font-face{font-family:"JetBrains Mono";font-weight:400;font-display:swap;src:url(fonts/jb-400.woff2) format("woff2");unicode-range:U+0400-04FF,U+2116}
+@font-face{font-family:"JetBrains Mono";font-weight:400;font-display:swap;src:url(fonts/jb-400-lat.woff2) format("woff2");unicode-range:U+0000-00FF,U+2010-2027,U+20AC}
+
+:root{
+  --night:#08111d;      /* фон: тёмно-синий из логотипа, сгущённый */
+  --ink:#eef2f6;        /* текст */
+  --dim:rgba(238,242,246,.62);
+  --line:rgba(238,242,246,.18);
+  --signal:#ff5b1f;     /* единственный акцент — цвет контейнера */
+  --pad:clamp(20px,4.2vw,64px);
+  --display:"Unbounded",system-ui,sans-serif;
+  --text:"Manrope",system-ui,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,monospace;
+  --ease:cubic-bezier(.22,.8,.2,1);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:auto}
+body{margin:0;background:var(--night);color:var(--ink);font:400 17px/1.55 var(--text);-webkit-font-smoothing:antialiased;overflow-x:clip}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+h1,h2,p,ul,ol{margin:0;padding:0}
+ul,ol{list-style:none}
+:focus-visible{outline:2px solid var(--signal);outline-offset:4px}
+.mono{font:400 12px/1.4 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
+.skip{position:absolute;left:-999px;top:8px;background:var(--ink);color:var(--night);padding:10px 14px;z-index:99}
+.skip:focus{left:8px}
+
+/* Фото: один чёрно-белый проявитель на весь сайт */
+.hero__media,.scene__media,.contact__media{position:absolute;inset:0;overflow:hidden;background:#0c1826}
+.hero__media img,.scene__media img,.contact__media img{width:100%;height:100%;object-fit:cover;will-change:transform}
+.hero__media img,.scene__media img,.contact__media img{filter:brightness(1.02) contrast(1.08)}
+.hero__media::after,.scene__media::after,.contact__media::after{content:"";position:absolute;inset:0;background:#46618f;mix-blend-mode:multiply;pointer-events:none}
+
+/* Шапка */
+.top{position:fixed;inset:0 0 auto 0;z-index:20;display:flex;align-items:center;gap:32px;padding:18px var(--pad);transition:transform .5s var(--ease),background-color .3s}
+.top.is-away{transform:translateY(-105%)}
+.top.is-solid{background:var(--night)}
+.top__logo img{height:30px;width:auto}
+.top__nav{display:flex;gap:28px;margin-left:auto;font-size:14px}
+.top__nav a,.top__cta{position:relative;padding:6px 0}
+.top__nav a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform .35s var(--ease)}
+.top__nav a:hover::after{transform:scaleX(1)}
+.top__cta{font-size:14px;padding:10px 18px;border:1px solid var(--line);border-radius:999px;transition:background .25s,color .25s,border-color .25s}
+.top__cta:hover{background:var(--ink);color:var(--night);border-color:var(--ink)}
+
+/* Кнопка */
+.btn{display:inline-flex;align-items:center;gap:14px;padding:8px 8px 8px 26px;border-radius:999px;background:var(--signal);color:#160802;font:500 16px/1 var(--text);white-space:nowrap;transition:transform .25s var(--ease)}
+.btn i{width:44px;height:44px;border-radius:50%;background:#160802;position:relative;flex:none;transition:transform .35s var(--ease)}
+.btn i::before{content:"";position:absolute;left:50%;top:50%;width:10px;height:10px;border-top:2px solid var(--signal);border-right:2px solid var(--signal);transform:translate(-70%,-50%) rotate(45deg)}
+.btn:hover i{transform:translateX(4px)}
+.btn:active{transform:scale(.97)}
+
+/* Первый экран */
+.hero{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding:120px var(--pad) 84px;overflow:hidden}
+.hero__body{position:relative;z-index:2}
+.hero__kicker{display:flex;gap:28px;margin-bottom:clamp(18px,3vh,36px);color:var(--ink)}
+.hero__kicker span+span{color:rgba(238,242,246,.82)}
+.hero__scroll{color:rgba(238,242,246,.82)}
+.hero__title{font:500 clamp(40px,8.6vw,150px)/.98 var(--display);letter-spacing:-.035em;text-wrap:balance}
+.hero__foot{display:flex;align-items:flex-end;justify-content:space-between;gap:32px;margin-top:clamp(28px,5vh,56px);padding-top:24px;border-top:1px solid var(--line)}
+.hero__lead{max-width:34ch;font-size:clamp(17px,1.5vw,21px);line-height:1.45}
+.hero__scroll{position:absolute;z-index:2;left:var(--pad);bottom:28px;display:flex;align-items:center;gap:14px}
+.hero__scroll b{display:block;width:56px;height:1px;background:var(--line);position:relative;overflow:hidden}
+.hero__scroll b::after{content:"";position:absolute;inset:0;background:var(--signal);animation:hint 2.2s var(--ease) infinite}
+@keyframes hint{0%{transform:translateX(-100%)}60%,100%{transform:translateX(100%)}}
+
+/* Путь груза. Без скриптов — пять обычных экранов подряд */
+.route{position:relative}
+.scene{position:relative;min-height:100svh;display:flex;align-items:flex-end;padding:120px var(--pad) 130px;overflow:hidden}
+.scene__text{position:relative;z-index:2;max-width:min(92vw,1100px)}
+.scene__num{margin-bottom:14px}
+.scene__num b{font-weight:400;color:var(--signal)}
+.scene__title{font:500 clamp(52px,12.5vw,210px)/.9 var(--display);letter-spacing:-.045em}
+.scene__copy{max-width:36ch;margin-top:clamp(18px,3vh,32px);font-size:clamp(17px,1.45vw,21px);line-height:1.45}
+.rail,.seam{display:none}
+/* Низ кадра затемнён одинаково — текст читается на любом фото */
+.scene::before{content:"";position:absolute;inset:35% 0 0 0;z-index:1;background:linear-gradient(to top,rgba(8,17,29,.86),rgba(8,17,29,0));pointer-events:none}
+
+/* Со скриптами — одна неподвижная сцена, прокрутка листает кадры */
+.js-route .route{height:calc(var(--scenes,5) * 115vh + 100vh)}
+.js-route .route__stage{position:sticky;top:0;height:100svh;overflow:hidden}
+.js-route .scene{position:absolute;inset:0;min-height:0;visibility:hidden}
+.js-route .scene.is-on{visibility:visible}
+.js-route .scene__text{will-change:transform,opacity}
+.js-route .rail{display:grid;grid-template-columns:repeat(5,1fr);position:absolute;z-index:5;left:var(--pad);right:var(--pad);bottom:34px;padding-top:16px;font-size:12.5px;color:rgba(238,242,246,.62)}
+.js-route .seam{display:block;position:absolute;z-index:6;top:0;bottom:0;left:0;width:1px;background:var(--signal);opacity:0;will-change:transform}
+.rail li{transition:color .4s}
+.rail li.is-here{color:var(--ink)}
+.rail__line{position:absolute;left:0;right:0;top:0;height:1px;background:var(--line)}
+.rail__line i{position:absolute;inset:0;background:var(--signal);transform-origin:left;transform:scaleX(0)}
+.rail__line i::after{content:"";position:absolute;right:-4px;top:-4px;width:9px;height:9px;border-radius:50%;background:var(--signal)}
+
+/* Главная мысль */
+.say{padding:clamp(110px,20vh,240px) var(--pad) clamp(90px,14vh,170px);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,4fr);gap:32px}
+.say__text{font:300 clamp(26px,3.7vw,58px)/1.16 var(--display);letter-spacing:-.03em;max-width:24ch;text-wrap:balance}
+.say__text .w{opacity:.16}
+
+/* Направления */
+.dirs{position:relative;padding:0 var(--pad) clamp(100px,16vh,200px)}
+.dirs__head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,4fr);gap:32px;align-items:baseline;margin-bottom:clamp(36px,6vh,72px)}
+.dirs__head h2{font:500 clamp(28px,3.6vw,56px)/1.05 var(--display);letter-spacing:-.03em}
+.dirs__list li{border-top:1px solid var(--line)}
+.dirs__list li:last-child{border-bottom:1px solid var(--line)}
+.dirs__list a{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2.4fr) minmax(0,1.6fr);gap:32px;align-items:baseline;padding:clamp(20px,3.2vh,34px) 0;transition:padding .45s var(--ease),color .3s}
+.dirs__list b{font:500 clamp(24px,3.4vw,54px)/1.05 var(--display);letter-spacing:-.03em}
+.dirs__list em{font-style:normal;color:var(--dim);font-size:16px}
+.dirs__list a:hover,.dirs__list a:focus-visible{padding-left:18px}
+.dirs__list a:hover .mono,.dirs__list a:focus-visible .mono{color:var(--signal)}
+.dirs__peek{position:fixed;left:0;top:0;z-index:15;width:min(26vw,360px);aspect-ratio:4/3;overflow:hidden;pointer-events:none;opacity:0;visibility:hidden}
+.dirs__peek img{width:100%;height:100%;object-fit:cover}
+
+/* Контакты */
+.contact{position:relative;min-height:100svh;display:flex;align-items:flex-end;padding:140px var(--pad) 80px;overflow:hidden}
+.contact__body{position:relative;z-index:2;width:100%}
+.contact__title{font:500 clamp(36px,7.4vw,128px)/.98 var(--display);letter-spacing:-.035em;margin:18px 0 clamp(32px,6vh,64px);max-width:14ch;text-wrap:balance}
+.contact__ways{display:flex;flex-wrap:wrap;gap:12px 56px;padding-top:26px;border-top:1px solid var(--line)}
+.contact__big{font:300 clamp(22px,3vw,44px)/1.2 var(--display);letter-spacing:-.02em;background:linear-gradient(var(--signal),var(--signal)) 0 100%/0 2px no-repeat;transition:background-size .45s var(--ease);padding-bottom:6px}
+.contact__big:hover,.contact__big:focus-visible{background-size:100% 2px}
+.contact__note{margin-top:22px;color:rgba(238,242,246,.8);max-width:44ch}
+
+.foot{display:flex;flex-wrap:wrap;gap:10px 32px;justify-content:space-between;padding:26px var(--pad);border-top:1px solid var(--line)}
+.foot a{color:var(--ink)}
+
+/* Маски для построчного появления (ставит SplitText) */
+.line-mask{overflow:clip;padding-bottom:.08em;margin-bottom:-.08em}
+
+/* Телефон */
+@media (max-width:699px){
+  body{font-size:16px}
+  .top{gap:12px;padding:14px var(--pad)}
+  .top__nav{display:none}
+  .top__cta{margin-left:auto;font-size:13px;padding:9px 14px}
+  .top__logo img{height:24px}
+  .hero{padding:96px var(--pad) 76px}
+  .hero__kicker{gap:14px;flex-wrap:wrap}
+  .hero__foot{flex-direction:column;align-items:flex-start;gap:22px}
+  .hero__scroll{bottom:22px;font-size:10px}
+  .scene{padding:96px var(--pad) 84px}
+  .js-route .route{height:calc(var(--scenes,5) * 95vh + 100vh)}
+  .js-route .rail{grid-template-columns:1fr;bottom:28px}
+  .js-route .rail li:not(.rail__line){display:none}
+  .js-route .rail li.is-here{display:block}
+  .say,.dirs__head{grid-template-columns:1fr;gap:16px}
+  .dirs__list a{grid-template-columns:auto 1fr;gap:6px 16px}
+  .dirs__list em{grid-column:2}
+  .contact{padding:110px var(--pad) 56px}
+  .contact__ways{flex-direction:column}
+  .foot{flex-direction:column}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .hero__scroll b::after{animation:none}
+  *{transition-duration:.01ms!important}
+}
+
+/* Пока шрифт и скрипт не готовы — не показываем заголовок, чтобы он не мигал */
+.js-wait .hero__title{visibility:hidden}
+
+.contact__btn{margin-top:30px}
+@media (max-width:699px){.mono{font-size:12px}.scene__media img[src*="s5"]{object-position:70% 50%}}
+
+/* ── Таджикская версия: шрифты с буквами қ ғ ҳ ҷ ӣ ӯ ── */
+@font-face{font-family:"Geologica";font-weight:300 500;font-display:swap;src:url(fonts/geo-cyrillic-ext.woff2) format("woff2");unicode-range:U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F}
+@font-face{font-family:"Geologica";font-weight:300 500;font-display:swap;src:url(fonts/geo-cyrillic.woff2) format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:"Geologica";font-weight:300 500;font-display:swap;src:url(fonts/geo-latin.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Onest";font-weight:400 500;font-display:swap;src:url(fonts/onest-cyrillic-ext.woff2) format("woff2");unicode-range:U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F}
+@font-face{font-family:"Onest";font-weight:400 500;font-display:swap;src:url(fonts/onest-cyrillic.woff2) format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:"Onest";font-weight:400 500;font-display:swap;src:url(fonts/onest-latin.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"IBM Plex Mono";font-weight:400;font-display:swap;src:url(fonts/plex-cyrillic-ext.woff2) format("woff2");unicode-range:U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F}
+@font-face{font-family:"IBM Plex Mono";font-weight:400;font-display:swap;src:url(fonts/plex-cyrillic.woff2) format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:"IBM Plex Mono";font-weight:400;font-display:swap;src:url(fonts/plex-latin.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+html[lang="tg"]{--display:"Geologica",system-ui,sans-serif;--text:"Onest",system-ui,sans-serif;--mono:"IBM Plex Mono",ui-monospace,monospace}
+html[lang="tg"] .hero__title,html[lang="tg"] .contact__title{letter-spacing:-.03em}
+html[lang="tg"] .scene__title{font-size:clamp(40px,9.4vw,160px);letter-spacing:-.035em}
+.top__lang{font:400 13px/1 var(--mono);letter-spacing:.06em;padding:9px 12px;border:1px solid var(--line);border-radius:999px;transition:background .25s,color .25s}
+.top__lang:hover{background:var(--ink);color:var(--night)}
+@media (max-width:699px){.top__lang{margin-left:auto}.top__cta{margin-left:0}}
